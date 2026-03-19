@@ -1,0 +1,12 @@
+{
+    "settings": {
+        "explorer": "https://etherscan.io/tx/"
+    },
+    "events": [
+        {
+            "tx_hashes": ["0x5e8bef5dcb69206fa1bacc8d0b0c0204e12f1e45483d12b9f69dc1829ac74315"],
+            "description": "Someone identifying as Hu Lezhi burned hundreds of ETH and attached a message accusing executives at a Chinese hedge fund of using 'brain-computer weapons'. The Eth was burned presumably to bring attention to the message.",
+            "title": "Hu Lezhi Brain-Computer Weapons Burn"
+        }
+    ]
+}

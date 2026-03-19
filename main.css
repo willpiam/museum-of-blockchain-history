@@ -1,0 +1,265 @@
+:root {
+    --bg: #06080f;
+    --panel: #121725;
+    --panel-elevated: #171d2f;
+    --text: #e9edff;
+    --muted: #a9b1d6;
+    --border: #2b3350;
+    --focus: #9ec6ff;
+    --btc: #f7931a;
+    --eth: #8b93ff;
+    --ada: #2a7de1;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 15% -10%, #182449 0%, transparent 40%),
+        radial-gradient(circle at 90% -20%, #1d1237 0%, transparent 45%),
+        var(--bg);
+}
+
+.container {
+    width: min(1100px, calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    background: var(--focus);
+    color: #0c1220;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
+    z-index: 2000;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+.site-header {
+    padding: 4rem 0 1.5rem;
+}
+
+.eyebrow {
+    margin: 0;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+h1 {
+    margin: 0.3rem 0 0;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+}
+
+.tagline {
+    margin: 0.8rem 0 0;
+    max-width: 70ch;
+    color: var(--muted);
+}
+
+.chain-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    position: sticky;
+    top: 0.3rem;
+    z-index: 1000;
+    padding: 0.5rem;
+    margin-bottom: 1.3rem;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+}
+
+.chain-filter {
+    appearance: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #101628;
+    color: var(--text);
+    padding: 0.45rem 0.9rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 180ms ease;
+}
+
+.chain-filter:hover {
+    border-color: #4f5e92;
+    transform: translateY(-1px);
+}
+
+.chain-filter:focus-visible,
+.event-link:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.chain-filter.is-active {
+    background: #1a2447;
+    border-color: #6f89dd;
+}
+
+main {
+    padding-bottom: 3rem;
+}
+
+.chain-section {
+    margin: 1.2rem 0 2rem;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    background: color-mix(in srgb, var(--panel) 92%, black);
+}
+
+.chain-section[data-chain="bitcoin"] {
+    box-shadow: inset 4px 0 0 var(--btc);
+}
+
+.chain-section[data-chain="ethereum"] {
+    box-shadow: inset 4px 0 0 var(--eth);
+}
+
+.chain-section[data-chain="cardano"] {
+    box-shadow: inset 4px 0 0 var(--ada);
+}
+
+.chain-section[hidden] {
+    display: none;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.section-heading p {
+    margin: 0.4rem 0 0;
+    color: var(--muted);
+    max-width: 72ch;
+}
+
+.events-grid {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    min-height: 220px;
+    border-radius: 0.8rem;
+    border: 1px solid var(--border);
+    background: var(--panel-elevated);
+    padding: 1rem;
+}
+
+.event-title {
+    margin: 0;
+    font-size: 1.08rem;
+}
+
+.event-description {
+    margin: 0;
+    color: #d5dcff;
+    font-size: 0.96rem;
+}
+
+.event-links {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.event-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #d9e4ff;
+    border: 1px solid #41507e;
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.85rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    word-break: break-all;
+    transition: 180ms ease;
+}
+
+.event-link:hover {
+    border-color: #7f98dd;
+    background: #1a264b;
+}
+
+.site-footer {
+    border-top: 1px solid var(--border);
+    padding: 1rem 0 1.4rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.about-me-links {
+    margin-top: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.about-me-links a {
+    color: #d9e4ff;
+    text-decoration: none;
+    font-size: 0.83rem;
+}
+
+.about-me-links a:hover {
+    text-decoration: underline;
+}
+
+.events-grid[data-loading="true"]::before,
+.events-grid[data-empty="true"]::before {
+    content: attr(data-message);
+    display: block;
+    color: var(--muted);
+    border: 1px dashed #3e4a77;
+    border-radius: 0.7rem;
+    padding: 0.8rem;
+}
+
+@media (max-width: 700px) {
+    .site-header {
+        padding-top: 2.7rem;
+    }
+
+    .chain-nav {
+        top: 0;
+        border-radius: 0.8rem;
+    }
+
+    .chain-filter {
+        flex: 1 1 calc(50% - 0.6rem);
+        text-align: center;
+    }
+}

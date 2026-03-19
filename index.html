@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Museum of Blockchain History</title>
+    <meta
+        name="description"
+        content="A curated museum of notable blockchain transactions across Bitcoin, Ethereum, and Cardano."
+    />
+    <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to exhibits</a>
+
+    <header class="site-header">
+        <div class="container">
+            <p class="eyebrow">Digital Ledger Archive</p>
+            <h1>Museum of Blockchain History</h1>
+            <p class="tagline">
+                Explore landmark on-chain moments and open each transaction directly in its native explorer.
+            </p>
+        </div>
+    </header>
+
+    <nav class="chain-nav container" aria-label="Blockchain sections">
+        <button class="chain-filter is-active" data-filter="all" type="button">All Chains</button>
+        <button class="chain-filter" data-filter="bitcoin" type="button">Bitcoin</button>
+        <button class="chain-filter" data-filter="ethereum" type="button">Ethereum</button>
+        <button class="chain-filter" data-filter="cardano" type="button">Cardano</button>
+    </nav>
+
+    <main id="main-content" class="container">
+        <section id="chain-bitcoin" class="chain-section" data-chain="bitcoin" aria-labelledby="heading-bitcoin">
+            <div class="section-heading">
+                <h2 id="heading-bitcoin">Bitcoin</h2>
+                <p>The first blockchain and birthplace of publicly verifiable peer-to-peer digital money.</p>
+            </div>
+            <div class="events-grid" data-events-for="bitcoin" aria-live="polite"></div>
+        </section>
+
+        <section id="chain-ethereum" class="chain-section" data-chain="ethereum" aria-labelledby="heading-ethereum">
+            <div class="section-heading">
+                <h2 id="heading-ethereum">Ethereum</h2>
+                <p>A programmable blockchain where transactions can carry code, value, and social signals.</p>
+            </div>
+            <div class="events-grid" data-events-for="ethereum" aria-live="polite"></div>
+        </section>
+
+        <section id="chain-cardano" class="chain-section" data-chain="cardano" aria-labelledby="heading-cardano">
+            <div class="section-heading">
+                <h2 id="heading-cardano">Cardano</h2>
+                <p>A research-driven blockchain focused on governance, formal methods, and long-term sustainability.</p>
+            </div>
+            <div class="events-grid" data-events-for="cardano" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Curated for historical and educational exploration.</p>
+            <div class="about-me-links">
+                <a href="https://projects.williamdoyle.ca/" target="_blank" rel="noopener noreferrer">My other projects</a>
+                <a href="https://app.ens.domains/williamdoyle.eth" target="_blank" rel="noopener noreferrer">williamdoyle.eth (addresses across all major blockchains)</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js" defer></script>
+</body>
+</html>
