@@ -32,7 +32,17 @@ function normalizeTxHashes(txHashes) {
     if (!Array.isArray(txHashes)) {
         return [];
     }
-    return txHashes.filter((hash) => typeof hash === "string" && hash.trim().length > 0);
+    return txHashes
+        .map((entry) => {
+            if (typeof entry === "string" && entry.trim().length > 0) {
+                return { hash: entry.trim(), description: "" };
+            }
+            if (entry && typeof entry === "object" && typeof entry.hash === "string" && entry.hash.trim().length > 0) {
+                return { hash: entry.hash.trim(), description: typeof entry.description === "string" ? entry.description.trim() : "" };
+            }
+            return null;
+        })
+        .filter(Boolean);
 }
 
 function createExplorerLinks(explorerBase, txHashes) {
@@ -42,10 +52,11 @@ function createExplorerLinks(explorerBase, txHashes) {
     }
 
     return links
-        .map((hash) => {
+        .map(({ hash, description }) => {
             const txUrl = `${explorerBase}${hash}`;
             const safeHash = escapeHtml(hash);
-            return `<li><a class="event-link" href="${txUrl}" target="_blank" rel="noopener noreferrer">${safeHash}</a></li>`;
+            const descMarkup = description ? `<span class="tx-description">${escapeHtml(description)}</span>` : "";
+            return `<li><a class="event-link" href="${txUrl}" target="_blank" rel="noopener noreferrer">${safeHash}</a>${descMarkup}</li>`;
         })
         .join("");
 }

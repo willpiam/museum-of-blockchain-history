@@ -21,20 +21,37 @@ def chain_heading(chain_name: str) -> str:
     return chain_name.capitalize()
 
 
+def normalize_tx_entry(entry) -> dict | None:
+    """Return {"hash": str, "description": str} or None for invalid entries."""
+    if isinstance(entry, str) and entry.strip():
+        return {"hash": entry.strip(), "description": ""}
+    if isinstance(entry, dict):
+        h = (entry.get("hash") or "").strip() if isinstance(entry.get("hash"), str) else ""
+        if h:
+            desc = (entry.get("description") or "").strip() if isinstance(entry.get("description"), str) else ""
+            return {"hash": h, "description": desc}
+    return None
+
+
 def render_event(event: dict, explorer_base: str) -> list[str]:
     lines: list[str] = []
     title = (event.get("title") or "").strip() or "Untitled Event"
     description = (event.get("description") or "").strip() or "Description coming soon."
-    tx_hashes = [h for h in (event.get("tx_hashes") or []) if isinstance(h, str) and h.strip()]
+    tx_entries = [
+        e for e in (normalize_tx_entry(h) for h in (event.get("tx_hashes") or [])) if e is not None
+    ]
 
     lines.append(f"- **{title}**")
     lines.append(f"  - {description}")
 
-    if tx_hashes:
+    if tx_entries:
         lines.append("  - Transactions:")
-        for tx_hash in tx_hashes:
-            tx_url = f"{explorer_base}{tx_hash}"
-            lines.append(f"    - [`{tx_hash}`]({tx_url})")
+        for tx in tx_entries:
+            tx_url = f"{explorer_base}{tx['hash']}"
+            label = f"`{tx['hash']}`"
+            if tx["description"]:
+                label += f" — {tx['description']}"
+            lines.append(f"    - [{label}]({tx_url})")
     else:
         lines.append("  - Transactions: None listed")
 
