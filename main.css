@@ -214,6 +214,53 @@ main {
     background: #1a264b;
 }
 
+.tx-description {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+    word-break: normal;
+}
+
+.event-ext-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0;
+    list-style: none;
+}
+
+.event-ext-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    text-decoration: none;
+    color: var(--focus);
+    border: 1px solid #2e3d6a;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.85rem;
+    background: rgba(158, 198, 255, 0.04);
+    transition: 180ms ease;
+}
+
+.event-ext-link::before {
+    content: "↗";
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+.event-ext-link:hover {
+    border-color: var(--focus);
+    background: rgba(158, 198, 255, 0.1);
+}
+
+.event-ext-link:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+}
+
 .site-footer {
     border-top: 1px solid var(--border);
     padding: 1rem 0 1.4rem;

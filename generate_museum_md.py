@@ -33,6 +33,22 @@ def normalize_tx_entry(entry) -> dict | None:
     return None
 
 
+def normalize_links(links) -> list[dict]:
+    """Return a list of {"url": str, "description": str} for valid link entries."""
+    if not isinstance(links, list):
+        return []
+    result = []
+    for entry in links:
+        if not isinstance(entry, dict):
+            continue
+        url = (entry.get("url") or "").strip() if isinstance(entry.get("url"), str) else ""
+        if not url:
+            continue
+        desc = (entry.get("description") or "").strip() if isinstance(entry.get("description"), str) else ""
+        result.append({"url": url, "description": desc})
+    return result
+
+
 def render_event(event: dict, explorer_base: str) -> list[str]:
     lines: list[str] = []
     title = (event.get("title") or "").strip() or "Untitled Event"
@@ -54,6 +70,13 @@ def render_event(event: dict, explorer_base: str) -> list[str]:
             lines.append(f"    - [{label}]({tx_url})")
     else:
         lines.append("  - Transactions: None listed")
+
+    links = normalize_links(event.get("links"))
+    if links:
+        lines.append("  - Links:")
+        for link in links:
+            label = link["description"] or link["url"]
+            lines.append(f"    - [{label}]({link['url']})")
 
     return lines
 

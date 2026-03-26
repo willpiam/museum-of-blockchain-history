@@ -12,6 +12,11 @@
   - Transactions:
     - [`a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d`](https://www.blockchain.com/explorer/transactions/btc/a1075db55d416d3ca199f55b6084e2115b9345e16c5cf302fc80e9d5fbf5d48d)
 
+- **Len Sassaman Tribute**
+  - According to Wikipedia, 'An ASCII art tribute by Dan Kaminsky in honor of Len, to be permanently embedded into Bitcoin's blockchain, was first announced during "The Wake for Len Sassaman" held at the DNA Lounge in San Francisco on July 30, 2011. Kaminsky revealed it publicly during Black Hat USA 2011 at the Caesars Palace venue in Las Vegas.'
+  - Transactions:
+    - [`930a2114cdaa86e1fac46d15c74e81c09eee1d4150ff9d48e76cb0697d8e1d72`](https://www.blockchain.com/explorer/transactions/btc/930a2114cdaa86e1fac46d15c74e81c09eee1d4150ff9d48e76cb0697d8e1d72)
+
 ## Ethereum
 
 - **Hu Lezhi Brain-Computer Weapons Burn**
@@ -42,3 +47,10 @@
     - [`f6c1eca7b475c3b36c40e0fbe5eb714641e0ab07ccbe2f3143c43f2fe3987a6e`](https://cardanoscan.io/transaction/f6c1eca7b475c3b36c40e0fbe5eb714641e0ab07ccbe2f3143c43f2fe3987a6e)
     - [`1f339c1c8c216ac88cdfd57be4bfedf7aeb9156014ab906318e2d78564aaf6d8`](https://cardanoscan.io/transaction/1f339c1c8c216ac88cdfd57be4bfedf7aeb9156014ab906318e2d78564aaf6d8)
     - [`50612b806f28d966d844c02f109d8550a12ff595f0e591b489e6487d32fd1a1f` — Summary/Index transaction](https://cardanoscan.io/transaction/50612b806f28d966d844c02f109d8550a12ff595f0e591b489e6487d32fd1a1f)
+
+- **DDOS Attack 2024**
+  - In June 2024 somebody took advantage of a discrepency in how transaction fees were calculated. Philip DiSarro explained the attack well: "The idea behind this attack is to take advantage of the fact that the size of reference scripts currently does not impact  the transaction fee, but it does impact the work that validators have to do to process the transaction." Cardano users soon noticed a flaw in the attack and exploited it to make the attack wildly expensive and unsustainable.
+  - Transactions:
+    - [`ab02ef16b0d863bfe4bf9f488873c967adfd461eb774c27689ac011227ea4f9f`](https://cardanoscan.io/transaction/ab02ef16b0d863bfe4bf9f488873c967adfd461eb774c27689ac011227ea4f9f)
+  - Links:
+    - [Phil DiSarro's tweet about the DDOS attack](https://x.com/phil_uplc/status/1805653337976504428)

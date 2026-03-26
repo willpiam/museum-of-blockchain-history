@@ -70,6 +70,35 @@ function escapeHtml(input) {
         .replace(/'/g, "&#39;");
 }
 
+function normalizeLinks(links) {
+    if (!Array.isArray(links)) {
+        return [];
+    }
+    return links
+        .filter((link) => link && typeof link === "object" && typeof link.url === "string" && link.url.trim().length > 0)
+        .map((link) => ({
+            url: link.url.trim(),
+            description: typeof link.description === "string" ? link.description.trim() : "",
+        }));
+}
+
+function createLinksMarkup(links) {
+    const normalized = normalizeLinks(links);
+    if (normalized.length === 0) {
+        return "";
+    }
+
+    const items = normalized
+        .map(({ url, description }) => {
+            const safeUrl = escapeHtml(url);
+            const label = description ? escapeHtml(description) : safeUrl;
+            return `<li><a class="event-ext-link" href="${safeUrl}" target="_blank" rel="noopener noreferrer">${label}</a></li>`;
+        })
+        .join("");
+
+    return `<ul class="event-ext-links">${items}</ul>`;
+}
+
 function createEventCard(event, explorerBase) {
     const safeEvent = event || {};
     const eventTitle = typeof safeEvent.title === "string" ? safeEvent.title.trim() : "";
@@ -77,13 +106,15 @@ function createEventCard(event, explorerBase) {
 
     const title = escapeHtml(eventTitle || "Untitled Event");
     const description = escapeHtml(eventDescription || "Description coming soon.");
-    const linksMarkup = createExplorerLinks(explorerBase, safeEvent.tx_hashes);
+    const txLinksMarkup = createExplorerLinks(explorerBase, safeEvent.tx_hashes);
+    const extLinksMarkup = createLinksMarkup(safeEvent.links);
 
     return `
         <article class="event-card">
             <h3 class="event-title">${title}</h3>
             <p class="event-description">${description}</p>
-            ${linksMarkup ? `<ul class="event-links">${linksMarkup}</ul>` : ""}
+            ${txLinksMarkup ? `<ul class="event-links">${txLinksMarkup}</ul>` : ""}
+            ${extLinksMarkup}
         </article>
     `;
 }
