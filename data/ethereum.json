@@ -4,11 +4,13 @@
     },
     "events": [
         {
+            "type": "transaction",
             "tx_hashes": ["0x5e8bef5dcb69206fa1bacc8d0b0c0204e12f1e45483d12b9f69dc1829ac74315"],
             "description": "Someone identifying as Hu Lezhi burned hundreds of ETH and attached a message accusing executives at a Chinese hedge fund of using 'brain-computer weapons'. The Eth was burned presumably to bring attention to the message.",
             "title": "Hu Lezhi Brain-Computer Weapons Burn"
         },
         {
+            "type": "transaction",
             "title": "ByBit Hack",
             "description": "The Bybit attack was remarkable because it was not a normal “smart contract bug” or private-key theft. The attackers compromised a Safe{Wallet} developer machine and used that access to slip malicious code into the wallet interface, so Bybit’s signers believed they were approving a routine transfer from a cold wallet to a warm wallet. In reality, they were authorizing a malicious transaction that changed control of the wallet itself, after which the attacker drained more than $1.4 billion in ETH and related assets. Investigations later attributed the theft to North Korean actors associated with TraderTraitor/Lazarus.<br/>What made it so exceptional was the combination of scale and method. It was described as unprecedented in sophistication, and it became the largest crypto theft on record. The attack showed that even a multisig cold wallet can fail if the signing process is manipulated at the interface layer: the blockchain and core Safe contracts were not the weak point; the human approval flow was. That made the hack a landmark example of a supply-chain and transaction-deception attack rather than a simple on-chain exploit.",
             "tx_hashes": [

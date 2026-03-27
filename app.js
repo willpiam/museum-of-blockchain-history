@@ -99,21 +99,50 @@ function createLinksMarkup(links) {
     return `<ul class="event-ext-links">${items}</ul>`;
 }
 
-function createEventCard(event, explorerBase) {
+function createBlockLink(blockExplorerBase, blockHash) {
+    if (!blockHash || typeof blockHash !== "string" || blockHash.trim().length === 0) {
+        return "";
+    }
+    const hash = blockHash.trim();
+    const url = `${blockExplorerBase}${hash}`;
+    const safeHash = escapeHtml(hash);
+    return `<li><a class="event-link" href="${url}" target="_blank" rel="noopener noreferrer">${safeHash}</a></li>`;
+}
+
+function getTypeBadge(type) {
+    const normalizedType = typeof type === "string" ? type.trim().toLowerCase() : "transaction";
+    if (normalizedType === "block") {
+        return `<span class="event-type-badge event-type-block">⬡ Block</span>`;
+    }
+    return `<span class="event-type-badge event-type-transaction">⮂ Transaction</span>`;
+}
+
+function createEventCard(event, explorerBase, blockExplorerBase) {
     const safeEvent = event || {};
     const eventTitle = typeof safeEvent.title === "string" ? safeEvent.title.trim() : "";
     const eventDescription = typeof safeEvent.description === "string" ? safeEvent.description.trim() : "";
+    const eventType = typeof safeEvent.type === "string" ? safeEvent.type.trim().toLowerCase() : "transaction";
 
     const title = escapeHtml(eventTitle || "Untitled Event");
     const description = escapeHtml(eventDescription || "Description coming soon.");
-    const txLinksMarkup = createExplorerLinks(explorerBase, safeEvent.tx_hashes);
+    const typeBadge = getTypeBadge(eventType);
     const extLinksMarkup = createLinksMarkup(safeEvent.links);
 
+    let hashLinksMarkup = "";
+    if (eventType === "block" && safeEvent.block_hash) {
+        hashLinksMarkup = createBlockLink(blockExplorerBase, safeEvent.block_hash);
+    } else {
+        hashLinksMarkup = createExplorerLinks(explorerBase, safeEvent.tx_hashes);
+    }
+
     return `
-        <article class="event-card">
-            <h3 class="event-title">${title}</h3>
+        <article class="event-card" data-event-type="${escapeHtml(eventType)}">
+            <div class="event-header">
+                ${typeBadge}
+                <h3 class="event-title">${title}</h3>
+            </div>
             <p class="event-description">${description}</p>
-            ${txLinksMarkup ? `<ul class="event-links">${txLinksMarkup}</ul>` : ""}
+            ${hashLinksMarkup ? `<ul class="event-links">${hashLinksMarkup}</ul>` : ""}
             ${extLinksMarkup}
         </article>
     `;
@@ -127,6 +156,7 @@ function renderChain(chainKey, chainData) {
 
     const events = chainData && Array.isArray(chainData.events) ? chainData.events : [];
     const explorerBase = chainData && chainData.settings ? chainData.settings.explorer || "" : "";
+    const blockExplorerBase = chainData && chainData.settings ? chainData.settings.block_explorer || "" : "";
 
     if (events.length === 0) {
         grid.innerHTML = "";
@@ -134,7 +164,7 @@ function renderChain(chainKey, chainData) {
         return;
     }
 
-    grid.innerHTML = events.map((event) => createEventCard(event, explorerBase)).join("");
+    grid.innerHTML = events.map((event) => createEventCard(event, explorerBase, blockExplorerBase)).join("");
     setGridState(chainKey, "ready", "");
 }
 
